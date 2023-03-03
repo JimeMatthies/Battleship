@@ -3,17 +3,26 @@
 
 :root {
     --font-family: 'Gloock', sans-serif;
-    --gradient-text: linear-gradient(0deg, #57A0C6 0%, #2ECA72 100%);
-    --gradient-bar: linear-gradient(90deg, #13364C 0%, #0287D6 100%);
     --color-bg: #13364C;
     --color-footer: #2e2e2e;
     --color-text: #57a0c6;
     --color-subtext: #2eca72;
 }
 
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--color-bg);
-    margin: 0;
+}
+
+a {
+    color: unset;
+    text-decoration: none;
 }
 
 .bs-header {

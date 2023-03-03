@@ -32,6 +32,10 @@ a {
     margin-top: 1rem;
 }
 
+.bs-rules {
+    margin-top: 5rem;
+}
+
 .bs-footer {
     background-color:var(--color-footer);
     font-family: 'Rokkitt', serif;

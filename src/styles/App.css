@@ -1,11 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Rokkitt:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gloock&display=swap');
+
+:root {
+    --font-family: 'Gloock', sans-serif;
+    --gradient-text: linear-gradient(0deg, #57A0C6 0%, #2ECA72 100%);
+    --gradient-bar: linear-gradient(90deg, #13364C 0%, #0287D6 100%);
+    --color-bg: #13364C;
+    --color-footer: #2e2e2e;
+    --color-text: #57a0c6;
+    --color-subtext: #2eca72;
+}
 
 body {
-    background-color: white;
+    background-color: var(--color-bg);
     margin: 0;
 }
 
-.footer {
-    background-color: rgb(46, 46, 46);
+.bs-header {
+    color: var(--color-subtext);
+    font-family: var(--font-family);
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.bs-footer {
+    background-color:var(--color-footer);
     font-family: 'Rokkitt', serif;
 }

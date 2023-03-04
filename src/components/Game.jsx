@@ -1,10 +1,14 @@
 import React from "react";
+import Fleet from './Fleet';
+import Player from './Player';
+import Computer from './Computer';
 
-const Game = ({reglas}) => {
+const Game = ({ reglas }) => {
     return (
-        <div className="bs-game">
-            <h1>Tablero 10x10</h1>
-            <button className="btn btn-success" onClick={reglas}>Reglas</button>
+        <div className="bs-game d-flex justify-content-center text-center mt-5">
+            <Fleet reglas={reglas}/>
+            <Player />
+            <Computer />
         </div>
     );
 }

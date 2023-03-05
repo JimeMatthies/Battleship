@@ -40,3 +40,10 @@ a {
     background-color:var(--color-footer);
     font-family: 'Rokkitt', serif;
 }
+
+table td {
+    background-color: white;
+    border: 1px solid gray;
+    width: 35px;
+    height: 35px;
+}

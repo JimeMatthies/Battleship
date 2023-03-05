@@ -4,58 +4,112 @@ const Player = () => {
 
     const [turn, setTurn] = useState('Jugador');
     const [cells, setCells] = useState(Array(99).fill(''));
-    const [computerHit, setComputerHit] = useState(0);
-    const [playerHit, setPlayerHit] = useState(0)
+    const [computerHits, setComputerHits] = useState(0);
+    const [playerHits, setPlayerHits] = useState(0);
+    const [computerShots, setComputerShots] = useState([]);
+
+    const computerTurn = () => {
+
+        console.log("ComputerTurn")
+        //console.log("Computer Pick = " + computerPick);
+        let pick = (Math.floor(Math.random() * 99));
+        console.log(pick)
+
+        if (computerShots.includes(pick)) {
+            console.log("Ya se disparo aqui");
+            console.log("Disparos a Barcos de la maquina = " + computerHits);
+            console.log("Lista de disparos = ");
+            console.log(computerShots);
+            //pick = Math.floor(Math.random() * 99)
+            //setComputerPick(pick);
+            computerTurn();
+            return;
+        }
+        else if (!computerShots.includes(pick)) {
+            if (cells[pick] === "X") {
+                console.log("No se ha disparado aqui");
+                computerShots.push(pick);
+                console.log("La maquina disparo a un barco");
+                setComputerHits(computerHits + 1);
+                console.log("Disparos a Barcos de la maquina = " + computerHits)
+                console.log("Lista de disparos = ")
+                console.log(computerShots);
+            }
+            else if (cells[pick] === "") {
+                console.log("No se ha disparado aqui");
+                computerShots.push(pick);
+                console.log("La maquina disparo al vacio");
+                //setComputerPick(Math.floor(Math.random() * 99));
+                console.log("Disparos a Barcos de la maquina = " + computerHits);
+                console.log("Lista de disparos = ");
+                console.log(computerShots);
+            }
+            setTurn('Jugador');
+        }
+    }
+
+    const generateComputerShips = () => {
+        console.log('generateComputerShips')
+    }
 
     const checkForWinner = () => {
-        let aihit = [...computerHit];
-        let pHit = [...playerHit];
-
-        if (aihit === 17){
-            console.log('computer wins')
+        if (computerHits === 17) {
+            alert("Computer Wins")
         }
-        else if (pHit === 17){
-            console.log('player wins')
+        else if (playerHits === 17) {
+            alert("Player Wins")
+        }
+        else {
+            console.log('checkForWinner')
         }
     }
 
     const placeBoats = (num) => {
         let squares = [...cells];
-        if(squares[num] === ''){
-            squares[num] = 'X';
-            setCells(squares);
-            console.log(num)
-            console.log(squares);
+        let shipscounter = squares.filter(x => x == 'X').length
+        if (squares[num] === '') {
+            if (shipscounter < 17) {
+                squares[num] = 'X';
+                setCells(squares);
+                console.log("Indice del pick = " + num)
+                console.log(squares);
+                console.log("Contador de Barcos = " + squares.filter(x => x == 'X').length);
+            }
+            else if (shipscounter >= 17) {
+                alert("Ya tienes todos tus barcos colocados, presiona start");
+            }
         }
         else if (squares[num] === 'X') {
             squares[num] = '';
             setCells(squares);
-            console.log(num);
+            console.log("Indice del pick = " + num)
             console.log(squares);
+            console.log("Contador de Barcos = " + squares.filter(x => x == 'X').length);
         }
     }
 
     const clearBoard = () => {
         setCells(Array(99).fill(''));
-        setComputerHit(0);
-        setPlayerHit(0);
-        console.log(cells);
+        setComputerHits(0);
+        setPlayerHits(0);
+        setComputerShots([]);
     }
 
     const startGame = () => {
-        
-        setTurn('Computador')
-        generateComputerShips();
 
-        "Computador juega"
+        let shipscounter = cells.filter(x => x == 'X').length
 
-        if ("computador pega"){
-            setComputerHit(computerHit + 1)
-        } else if (
-            "Computer miss"
-        )
-        checkForWinner()
-        setTurn('Jugador')
+        if (shipscounter === 17) {
+
+            setTurn('Computador')
+            generateComputerShips();
+            computerTurn();
+            checkForWinner()
+
+        }
+        else if (shipscounter < 17) {
+            alert("Te faltan barcos por colocar")
+        }
     }
 
     const Cell = ({ num }) => {
@@ -189,6 +243,7 @@ const Player = () => {
             <div className="bs-player__reset mt-3">
                 <button className="btn btn-success mx-3" onClick={() => clearBoard()}>Reset</button>
                 <button className="btn btn-success mx-3" onClick={() => startGame()}>Start</button>
+                <button className="btn btn-success mx-3" onClick={() => computerTurn()}>TurnoMaquina</button>
             </div>
         </div>
     );

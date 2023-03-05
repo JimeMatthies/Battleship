@@ -41,9 +41,24 @@ a {
     font-family: 'Rokkitt', serif;
 }
 
-table td {
+.bs-game h1{
+    color: var(--color-text);
+}
+
+.board {
+    border: 1rem solid var(--color-subtext);
+    border-radius: 1%;
+    background: var(--color-subtext);
+    width: 400px;
+    height: 400px;
+    display: grid;
+    grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+    gap: 0.5rem;
+}
+
+.squares {
     background-color: white;
-    border: 1px solid gray;
-    width: 35px;
-    height: 35px;
+    border: none;
+    width: 1.8rem;
+    height: 1.8rem;
 }

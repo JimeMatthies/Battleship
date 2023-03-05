@@ -1,7 +1,7 @@
 import React from "react";
 import Board from "./Board";
 
-const Player = ({cells, placeBoats, clearBoard, startGame, computerTurn }) => {
+const Player = ({cells, placeBoats, clearBoard, startGame }) => {
 
     return (
         <div className="bs-player col-4">
@@ -14,7 +14,6 @@ const Player = ({cells, placeBoats, clearBoard, startGame, computerTurn }) => {
             <div className="bs-player__reset mt-3">
                 <button className="btn btn-success mx-3" onClick={clearBoard}>Reset</button>
                 <button className="btn btn-success mx-3" onClick={startGame}>Start</button>
-                <button className="btn btn-success mx-3" onClick={computerTurn}>TurnoMaquina</button>
             </div>
         </div>
     );

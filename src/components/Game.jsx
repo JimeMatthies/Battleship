@@ -7,6 +7,7 @@ const Game = ({ reglas }) => {
 
     const [turn, setTurn] = useState('Jugador');
     const [cells, setCells] = useState(Array(100).fill(''));
+    const [aicells, setAiCells] = useState(Array(100).fill(''));
     const [computerHits, setComputerHits] = useState(0);
     const [playerHits, setPlayerHits] = useState(0);
     const [computerShots, setComputerShots] = useState([]);
@@ -41,6 +42,8 @@ const Game = ({ reglas }) => {
         }
         else {
             console.log('checkForWinner')
+            console.log("Puntos de la Computadora "+computerHits);
+            console.log("Puntos del Jugador "+playerHits)
         }
     }
 
@@ -82,11 +85,60 @@ const Game = ({ reglas }) => {
         }
     }
 
+    const generateComputerShips = () => {
+        let computerFleet = [];
+        let aisquare = [...aicells]
+        let repetido;
+        console.log(aisquare)
+        for (let i = 0; i < 17; i++) {
+            while (!computerFleet[i]) {
+                repetido = true;
+                while (repetido == true) {
+                    let random = Math.random();
+                    random = random * 99;
+                    random = Math.trunc(random);
+                    for (let j = 0; j < computerFleet.length; j++) {
+                        if (computerFleet[j] == random) {
+                            repetido = true;
+                            break;
+                        } else {
+                            repetido = false;
+                        }
+                    }
+                    computerFleet[i] = random;
+                }
+            }
+            aisquare[computerFleet[i]] = "X"
+            console.log("Indice en al flota " + i);
+            console.log("Numero del barco " + computerFleet[i]);
+        }
+        console.log(aisquare);
+        setAiCells(aisquare)
+        console.log(aicells);
+    }
+
+    const checkForBoats = (num) => {
+        let boarddelacompu = [...aicells];
+        console.log(num)
+        console.log(boarddelacompu)
+        if (boarddelacompu[num] === 'X') {
+            console.log("player hit")
+            setPlayerHits(playerHits + 1);
+        }
+        else if (boarddelacompu[num] === "") {
+            console.log("player miss")
+        }
+
+        console.log("checkforboats")
+        checkForWinner();
+        computerTurn();
+    }
+
     return (
         <div className="bs-game d-flex justify-content-center text-center mt-3">
             <Fleet reglas={reglas}/>
-            <Player cells={cells} placeBoats={placeBoats} clearBoard={clearBoard} startGame={startGame} computerTurn={computerTurn}/>
-            <Computer cells={cells} />
+            <Player cells={cells} placeBoats={placeBoats} clearBoard={clearBoard} startGame={startGame}/>
+            <Computer aicells={aicells} checkForBoats={checkForBoats}/>
         </div>
     );
 }

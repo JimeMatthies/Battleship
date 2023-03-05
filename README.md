@@ -18,6 +18,7 @@ Para esto, debes tener instalado [Node js](https://nodejs.org/en/).
  - Html 
  - CSS
  - React
+ - Bootstrap
 
 ## Creditos
 
